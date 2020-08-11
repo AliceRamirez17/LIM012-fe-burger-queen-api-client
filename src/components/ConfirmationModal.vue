@@ -1,11 +1,11 @@
 <template>
-    <div v-if="visible" class="modal">
-      <div class="modal-employee">
+    <div class="modal">
+      <div class="confirmation-employee">
         <h2 class="conf-text">¿Estás seguro que deseas realizar esta acción?</h2>
-        <button class="btn-close-modal" @click="close"></button>
+        <button class="btn-close-modal" @click="$emit('close')"></button>
         <div class="button-enclosure">
           <button class="accept" @click="deleteEmployee">Sí</button>
-          <button class="decline" @click="close">No</button>
+          <button class="decline" @click="$emit('close')">No</button>
         </div>
       </div>
     </div>
@@ -16,18 +16,17 @@
 export default {
   data() {
     return {
-      visible: false,
     };
   },
   props: ['eliminar', 'id'],
   methods: {
     // eslint-disable-next-line no-unused-vars
-    show(index) {
-      this.visible = true;
-    },
-    close() {
-      this.visible = false;
-    },
+    // show(index) {
+    //   this.visible = true;
+    // },
+    // close() {
+    //   this.visible = false;
+    // },
     deleteEmployee() {
       console.log('i clicked now');
     }
@@ -56,7 +55,7 @@ export default {
     height: 100vh;
     background-color: rgba($color: #000000, $alpha: 0.4);
 
-    .modal-employee {
+    .confirmation-employee {
       position: relative;
       display: flex;
       flex-direction: column;

@@ -4,10 +4,9 @@
         <h3> {{ user.email }} </h3>
         <h3 class="employee-role"> {{ (user.role == 'Administrador') ? 'Admin' : 'User' }} </h3>
         <button @click="showEditModal(user._id)" class="edit-employee-btn"></button>
-        <button @click="showConfirmationModal" class="delete-employee-btn"></button>
-        <confirmation-modal v-if="confirmation" :id="user._id" :ref="'modal_' + index" 
-        @close="confirmation=false" />
+        <button @click="showConfirmationModal(user._id)" class="delete-employee-btn"></button>
       </div>
+      <confirmation-modal v-if="confirmation" @close="confirmation=false" />
       <modal-employee v-if="modal" @close="modal=false" :editEmail="email" button="Guardar cambios"/>
     </div>
 </template>
@@ -39,12 +38,15 @@ export default {
         return index === user._id;
       });
       this.$emit('click', userToEdit[0]);
-      this.email=userToEdit[0].email;
+      this.email = userToEdit[0].email;
     },
-    showConfirmationModal() {
+    showConfirmationModal(index) {
       console.log('i clicked');
       this.confirmation = true;
-      console.log(this.confirmation);
+      const userToDelete = this.users.filter(function(user) {
+        return index === user._id;
+      });
+      this.$emit('click', userToDelete[0]);
     }
   },
 };

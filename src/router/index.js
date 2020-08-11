@@ -23,7 +23,7 @@ const routes = [
       if (window.localStorage.getItem('token') != ''){
         next()
       }
-      next('/')
+      else next('/')
     }
   },
 ];
