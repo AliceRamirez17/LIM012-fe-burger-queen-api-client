@@ -9,11 +9,6 @@
       @click.native="handleSendForm" >
         Entrar
       </router-link>
-      <!-- TODO:
-      1. User input validation...
-      2. Redirigir a la vista correspondiente dependiendo del rol de usuario aquí y si ya tiene token 
-      en el router
-      -->
     </div>
   </div>
 </template>

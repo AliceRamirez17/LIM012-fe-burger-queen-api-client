@@ -14,10 +14,6 @@
         <router-link to="" tag="button" class="btn-manager">Productos</router-link>
     </div>
   </div>
-  <!-- TODO:
-  1. Vincular el nombre del usuario desde CredentialsView
-  2. Hacer renderizado condicional de componente trabajadores/productos con default en trabajadores
-  -->
 </template>
 
 <script>

@@ -6,7 +6,7 @@
         <button @click="showEditModal(user._id)" class="edit-employee-btn"></button>
         <button @click="showConfirmationModal(user._id)" class="delete-employee-btn"></button>
       </div>
-      <confirmation-modal v-if="confirmation" @close="confirmation=false" />
+      <confirmation-modal v-if="confirmation" @close="confirmation=false" @add-function="handleDeleteEmployee"/>
       <modal-employee v-if="modal" @close="modal=false" :editEmail="email" button="Guardar cambios"/>
     </div>
 </template>
@@ -15,6 +15,8 @@
 
 import ConfirmationModal from './ConfirmationModal.vue';
 import ModalEmployee from './ModalEmployee.vue';
+
+// const token = 'qwerryuipuq';
 
 export default {
   name: 'EmployeeList',
@@ -47,6 +49,9 @@ export default {
         return index === user._id;
       });
       this.$emit('click', userToDelete[0]);
+    },
+    handleDeleteEmployee() {
+      console.log('i clicked now');
     }
   },
 };
