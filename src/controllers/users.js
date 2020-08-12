@@ -34,8 +34,8 @@ export const editEmployee = (token, data) => {
 }
 
 export const deleteEmployee = (token, data) => {
-  return fetch('http://localhost:3000/users', {
-    method: 'PUT',
+  return fetch(`http://localhost:3000/users/${data}`, {
+    method: 'DELETE',
     body: JSON.stringify(data),
     headers:{
       'Content-Type': 'application/json',

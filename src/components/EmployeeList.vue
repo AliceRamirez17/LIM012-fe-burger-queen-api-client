@@ -2,7 +2,7 @@
     <div class="employees-list">
       <div v-for="(user, index) in users" :key="index" class="each-employee">
         <h3> {{ user.email }} </h3>
-        <h3 class="employee-role"> {{ (user.role == 'Administrador') ? 'Admin' : 'User' }} </h3>
+        <h3 class="employee-role"> {{ (user.role === 'Administrador') ? 'Admin' : 'User' }} </h3>
         <button @click="showEditModal(user._id)" class="edit-employee-btn"></button>
         <button @click="showConfirmationModal(user._id)" class="delete-employee-btn"></button>
       </div>
@@ -15,8 +15,9 @@
 
 import ConfirmationModal from './ConfirmationModal.vue';
 import ModalEmployee from './ModalEmployee.vue';
+import { deleteEmployee } from '../controllers/users';
 
-// const token = 'qwerryuipuq';
+const token = 'qwerryuipuq';
 
 export default {
   name: 'EmployeeList',
@@ -45,13 +46,19 @@ export default {
     showConfirmationModal(index) {
       console.log('i clicked');
       this.confirmation = true;
+      const modalToDelete = this.users.filter(function(user) {
+        return index === user._id;
+      });
+      this.$emit('click', modalToDelete[0]);
+    },
+    handleDeleteEmployee(index) {
+      console.log('i clicked now');
       const userToDelete = this.users.filter(function(user) {
         return index === user._id;
       });
-      this.$emit('click', userToDelete[0]);
-    },
-    handleDeleteEmployee() {
-      console.log('i clicked now');
+      deleteEmployee(token, userToDelete[0])
+        .then(response => (this.users = [...this.users, response]))
+        .then(this.confirmation = false)
     }
   },
 };
