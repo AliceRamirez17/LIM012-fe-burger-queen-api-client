@@ -1,19 +1,19 @@
 <template>
   <div class="manager">
-    <nav-component fullname="manager"/>
-    <router-link to="" tag="button" class="btn-prev"></router-link>
+    <nav-component fullname="manager" :style="employeeList ? colorEmployees : colorProducts "/>
+    <router-link to="" tag="button" class="btn-prev" :style="employeeList ? colorEmployees : colorProducts"></router-link>
     <EmployeeList v-if="employeeList" :users="users" @click="getUserData"/>
     <ProductsList v-if="productsList" />
-    <router-link to="" tag="button" class="btn-next"></router-link>
+    <router-link to="" tag="button" class="btn-next" :style="employeeList ? colorEmployees : colorProducts"></router-link>
     <div class="new-employee">
-        <h3>Agregar trabajador</h3>
+        <h3>{{ employeeList ? 'Agregar trabajador' : 'Agregar producto' }}</h3>
         <button class="btn-new-employee" @click="modal=true"></button>
     </div>
     <modal-employee v-if="modal" @close="modal=false" @click="handleAddEmployee" :user="user" button="Agregar Trabajador" />
     <div class="buttons">
         <!-- <router-link to="" tag="button" class="btn-manager employees">Trabajadores</router-link> -->
-        <button @click="showEmployees" class="btn-manager employees">Trabajadores</button>
-        <button @click="showProducts" class="btn-manager">Productos</button>
+        <button @click="showEmployees" class="btn-manager" :style="employeeList ? styleObj1 : 'none'">Trabajadores</button>
+        <button @click="showProducts" class="btn-manager" :style="productsList ? styleObj2 : 'none'">Productos</button>
         <!-- <router-link to="" tag="button" class="btn-manager">Productos</router-link> -->
     </div>
   </div>
@@ -38,6 +38,23 @@ export default {
       employeeList: true,
       users: [],
       user: {},
+      styleObj1: {
+        'background-color': '#00C7D4',
+        'border': 'none',
+      },
+      styleObj2: {
+        'background-color': '#FF5E53',
+        'border': 'none',
+      },
+      colorEmployees: {
+        'background-color': '#00C7D4',
+      },
+      colorProducts: {
+        'background-color': '#FF5E53',
+      },
+      border: {
+        'border': 'none'
+      }
     };
   },
   components: {
@@ -104,7 +121,9 @@ export default {
       border-radius: 50%;
       align-self: center;
       background-color: transparent;
-      background-size: contain;
+      background-size: 50%;
+      background-repeat: no-repeat;
+      background-position: center;
       outline: none;
       cursor: pointer;
     }
@@ -113,13 +132,13 @@ export default {
       grid-column: 1 /2;
       grid-row: 2 / 3;
       justify-self: end;
-      background-image: url(../assets/btn-prev.svg);
+      background-image: url(../assets/arrow-prev.svg);
     }
 
     .btn-next {
       grid-column: 3 / 4;
       grid-row: 2 / 3;
-      background-image: url(../assets/btn-next.svg);
+      background-image: url(../assets/arrow-next.svg);
     }
 
     .new-employee {
