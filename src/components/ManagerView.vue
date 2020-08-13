@@ -2,7 +2,8 @@
   <div class="manager">
     <nav-component fullname="manager"/>
     <router-link to="" tag="button" class="btn-prev"></router-link>
-    <EmployeeList :users="users" @click="getUserData"/>
+    <EmployeeList v-if="employeeList" :users="users" @click="getUserData"/>
+    <ProductsList v-if="productsList" />
     <router-link to="" tag="button" class="btn-next"></router-link>
     <div class="new-employee">
         <h3>Agregar trabajador</h3>
@@ -10,8 +11,10 @@
     </div>
     <modal-employee v-if="modal" @close="modal=false" @click="handleAddEmployee" :user="user" button="Agregar Trabajador" />
     <div class="buttons">
-        <router-link to="" tag="button" class="btn-manager employees">Trabajadores</router-link>
-        <router-link to="" tag="button" class="btn-manager">Productos</router-link>
+        <!-- <router-link to="" tag="button" class="btn-manager employees">Trabajadores</router-link> -->
+        <button @click="showEmployees" class="btn-manager employees">Trabajadores</button>
+        <button @click="showProducts" class="btn-manager">Productos</button>
+        <!-- <router-link to="" tag="button" class="btn-manager">Productos</router-link> -->
     </div>
   </div>
 </template>
@@ -22,6 +25,7 @@ import { getEmployees, addEmployee } from '../controllers/users.js'
 import NavComponent from './NavComponent.vue';
 import EmployeeList from './EmployeeList.vue';
 import ModalEmployee from './ModalEmployee.vue';
+import ProductsList from './ProductsList';
 
 const token = 'qwerryuipuq';
 
@@ -30,6 +34,8 @@ export default {
   data() {
     return {
       modal: false,
+      productsList: false,
+      employeeList: true,
       users: [],
       user: {},
     };
@@ -38,6 +44,7 @@ export default {
     NavComponent,
     EmployeeList,
     ModalEmployee,
+    ProductsList,
   },
   mounted () {
     getEmployees(token)
@@ -60,6 +67,14 @@ export default {
     },
     getUserData(user){
       console.log(user.email);
+    },
+    showEmployees(){
+      this.employeeList = true,
+      this.productsList = false
+    },
+    showProducts(){
+      this.productsList = true,
+      this.employeeList = false
     }
   }
 };
