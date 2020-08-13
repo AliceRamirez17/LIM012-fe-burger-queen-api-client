@@ -33,10 +33,9 @@ export const editEmployee = (token, data) => {
   .then(response => (response.json()))
 }
 
-export const deleteEmployee = (token, data) => {
-  return fetch(`http://localhost:3000/users/${data}`, {
+export const deleteEmployee = (token, id) => {
+  return fetch(`http://localhost:3000/users/${id}`, {
     method: 'DELETE',
-    body: JSON.stringify(data),
     headers:{
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,

@@ -6,7 +6,7 @@
         <button @click="showEditModal(user._id)" class="edit-employee-btn"></button>
         <button @click="showConfirmationModal(user._id)" class="delete-employee-btn"></button>
       </div>
-      <confirmation-modal v-if="confirmation" @close="confirmation=false" @add-function="handleDeleteEmployee"/>
+      <confirmation-modal v-if="confirmation" @close="confirmation=false" @add-function="handleDeleteEmployee()"/>
       <modal-employee v-if="modal" @close="modal=false" :editEmail="email" button="Guardar cambios"/>
     </div>
 </template>
@@ -52,13 +52,17 @@ export default {
       this.$emit('click', modalToDelete[0]);
     },
     handleDeleteEmployee(index) {
-      console.log('i clicked now');
-      const userToDelete = this.users.filter(function(user) {
-        return index === user._id;
-      });
-      deleteEmployee(token, userToDelete[0])
-        .then(response => (this.users = [...this.users, response]))
-        .then(this.confirmation = false)
+      console.log('i clicked now ' + index);
+      this.confirmation = false;
+      // const userToDelete = this.users.filter(function(user) {
+      //   return index === user._id
+      // });
+      // this.$emit('add-function', userToDelete[0]);
+      // console.log(userToDelete);
+      deleteEmployee(token, index)
+        .then((resp) => {
+          console.log(resp)
+        })
     }
   },
 };

@@ -9,27 +9,26 @@ const routes = [
     path: '/',
     name: 'Credentials',
     component: Credentials,
-    beforeEnter: (to, from, next) => {
-      if (window.localStorage.getItem('token') != ''){
-        next('/manager/employees')
-      }
-    }
   },
   {
     path: '/manager/employees',
     name: 'Manager',
     component: () => import(/* webpackChunkName: "about" */ '../components/ManagerView'),
-    beforeEnter: (to, from, next) => {
-      if (window.localStorage.getItem('token') != ''){
-        next()
-      }
-      else next('/')
-    }
   },
 ];
 
 const router = new VueRouter({
+  mode: 'history',
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Credentials' && !window.localStorage.getItem('token')){
+    next({
+      name: 'Credentials'
+    })
+  }
+  else next()
+})
 
 export default router;
