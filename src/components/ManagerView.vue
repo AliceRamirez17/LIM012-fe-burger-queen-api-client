@@ -3,7 +3,7 @@
     <nav-component fullname="manager" :style="employeeList ? colorEmployees : colorProducts "/>
     <router-link to="" tag="button" class="btn-prev" :style="employeeList ? colorEmployees : colorProducts"></router-link>
     <EmployeeList v-if="employeeList" :users="users" @click="getUserData"/>
-    <ProductsList v-if="productsList" />
+    <ProductsList v-if="productsList" :products="products"/>
     <router-link to="" tag="button" class="btn-next" :style="employeeList ? colorEmployees : colorProducts"></router-link>
     <div class="new-employee">
         <h3>{{ employeeList ? 'Agregar trabajador' : 'Agregar producto' }}</h3>
@@ -11,16 +11,15 @@
     </div>
     <modal-employee v-if="modal" @close="modal=false" @click="handleAddEmployee" :user="user" button="Agregar Trabajador" />
     <div class="buttons">
-        <!-- <router-link to="" tag="button" class="btn-manager employees">Trabajadores</router-link> -->
         <button @click="showEmployees" class="btn-manager" :style="employeeList ? styleObj1 : 'none'">Trabajadores</button>
         <button @click="showProducts" class="btn-manager" :style="productsList ? styleObj2 : 'none'">Productos</button>
-        <!-- <router-link to="" tag="button" class="btn-manager">Productos</router-link> -->
     </div>
   </div>
 </template>
 
 <script>
 import { getEmployees, addEmployee } from '../controllers/users.js'
+import { getProducts } from '../controllers/products.js'
 
 import NavComponent from './NavComponent.vue';
 import EmployeeList from './EmployeeList.vue';
@@ -54,7 +53,9 @@ export default {
       },
       border: {
         'border': 'none'
-      }
+      },
+      products: [],
+      product: {},
     };
   },
   components: {
@@ -66,6 +67,8 @@ export default {
   mounted () {
     getEmployees(token)
       .then(response => (this.users = response))
+    getProducts(token)
+      .then(response => (this.products = response))
   },
   methods: {
     handleAddEmployee(obj) {
@@ -95,7 +98,6 @@ export default {
     }
   }
 };
-
 </script>
 
 <style lang="scss">
@@ -107,6 +109,11 @@ export default {
       border-radius: $radius;
     }
 
+    @mixin width-height($width, $height) {
+      width: $width;
+      height: $height;
+    }
+
     .manager {
       height: 100vh;
       display: grid;
@@ -115,8 +122,7 @@ export default {
     }
 
     .btn-prev, .btn-next {
-      width: 65px;
-      height: 65px;
+      @include width-height(65px, 65px);
       border: none;
       border-radius: 50%;
       align-self: center;
@@ -158,8 +164,7 @@ export default {
       }
 
       .btn-new-employee {
-        width: 65px;
-        height: 65px;
+        @include width-height(65px, 65px);
         outline: none;
         cursor: pointer;
         @include background-img(transparent,'../assets/btn-new-employee.svg', contain, none, 50%);
@@ -175,8 +180,7 @@ export default {
       border-top: 1px solid black;
 
       .btn-manager {
-        width: 460px;
-        height: 60px;
+        @include width-height(460px, 60px);
         font-size: 30px;
         font-weight: 800;
         border-radius: 10px;
@@ -185,11 +189,6 @@ export default {
         cursor: pointer;
         background-color: white;
         border: 1px solid black;
-      }
-
-      .employees {
-        background-color: #00C7D4;
-        border: none;
       }
     }
 </style>

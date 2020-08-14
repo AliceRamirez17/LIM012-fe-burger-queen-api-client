@@ -5,9 +5,8 @@
         <h3 class="employee-role"> {{ (user.role === 'Administrador') ? 'Admin' : 'User' }} </h3>
         <button @click="showEditModal(user._id)" class="edit-employee-btn"></button>
         <button @click="showConfirmationModal(user._id)" class="delete-employee-btn"></button>
-        <confirmation-modal v-if="confirmation" @close="confirmation=false" @add-function="handleDeleteEmployee(user._id)"/>
       </div>
-      
+      <confirmation-modal v-if="confirmation" @close="confirmation=false" @add-function="handleDeleteEmployee()"/>
       <modal-employee v-if="modal" @close="modal=false" :editEmail="email" button="Guardar cambios"/>
     </div>
 </template>
