@@ -9,7 +9,7 @@
         <h3>{{ employeeList ? 'Agregar trabajador' : 'Agregar producto' }}</h3>
         <button class="btn-new-employee" @click="modal=true"></button>
     </div>
-    <modal-employee v-if="modal" @close="modal=false" @click="handleAddEmployee" :user="user" button="Agregar Trabajador" />
+    <modal-employee v-if="modal" @close="modal=false" :addFunction="handleAddEmployee" :user="user" button="Agregar Trabajador" />
     <div class="buttons">
         <button @click="showEmployees" class="btn-manager" :style="employeeList ? styleObj1 : 'none'">Trabajadores</button>
         <button @click="showProducts" class="btn-manager" :style="productsList ? styleObj2 : 'none'">Productos</button>
@@ -68,7 +68,10 @@ export default {
     getEmployees(token)
       .then(response => (this.users = response))
     getProducts(token)
-      .then(response => (this.products = response))
+      .then(response => {
+        console.log(response);
+        return this.products = response
+      })
   },
   methods: {
     handleAddEmployee(obj) {
@@ -77,8 +80,8 @@ export default {
         _id: Math.random()*1000,
         email: obj.email,
         password: obj.password,
-        roles: {
-          admin: obj.role === "true"
+        role: {
+          admin: obj.role === "Admin"
         }
       }
       addEmployee(token, objEmployee)

@@ -2,11 +2,11 @@
     <div class="employees-list">
       <div v-for="(user, index) in users" :key="index" class="each-employee">
         <h3> {{ user.email }} </h3>
-        <h3 class="employee-role"> {{ (user.role === 'Administrador') ? 'Admin' : 'User' }} </h3>
+        <h3 class="employee-role"> {{ user.role.admin ? 'Admin' : 'User' }} </h3>
         <button @click="showEditModal(user._id)" class="edit-employee-btn"></button>
         <button @click="showConfirmationModal(user._id)" class="delete-employee-btn"></button>
       </div>
-      <confirmation-modal v-if="confirmation" @close="confirmation=false" @add-function="handleDeleteEmployee()"/>
+      <confirmation-modal v-if="confirmation" @close="confirmation=false, choice={}" :addFunction="handleDeleteEmployee"/>
       <modal-employee v-if="modal" @close="modal=false" :editEmail="email" button="Guardar cambios"/>
     </div>
 </template>
@@ -32,6 +32,7 @@ export default {
     return {
       modal: false,
       confirmation: false,
+      choice: {},
     };
   },
   methods: {
@@ -49,17 +50,13 @@ export default {
       const modalToDelete = this.users.filter(function(user) {
         return index === user._id;
       });
-      this.$emit('click', modalToDelete[0]);
+      this.choice = modalToDelete[0];
     },
-    handleDeleteEmployee(index) {
-      console.log('i clicked now ' + index);
+    handleDeleteEmployee() {
+      console.log('i clicked now');
       this.confirmation = false;
-      // const userToDelete = this.users.filter(function(user) {
-      //   return index === user._id
-      // });
-      // this.$emit('add-function', userToDelete[0]);
-      // console.log(userToDelete);
-      deleteEmployee(token, index)
+      console.log(this.choice._id);
+      deleteEmployee(token, this.choice._id)
         .then((resp) => {
           console.log(resp)
         })

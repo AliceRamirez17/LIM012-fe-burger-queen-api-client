@@ -4,7 +4,7 @@
         <h2 class="conf-text">¿Estás seguro que deseas realizar esta acción?</h2>
         <button class="btn-close-modal" @click="$emit('close')"></button>
         <div class="button-enclosure">
-          <button class="accept" @click="$emit('add-function')">Sí</button>
+          <button class="accept" @click="addFunction">Sí</button>
           <button class="decline" @click="$emit('close')">No</button>
         </div>
       </div>
@@ -18,7 +18,7 @@ export default {
     return {
     };
   },
-  props: ['add-function'],
+  props: ['addFunction'],
   methods: {
   },
 };

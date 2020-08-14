@@ -11,7 +11,7 @@
             <option>Usuario</option>
           </select>
           <button class="btn-close-modal" @click="$emit('close')"></button>
-          <button class="submit-modal" @click="addFunction">{{ button }}</button>
+          <button class="submit-modal" @click="addFunction(userObj)">{{ button }}</button>
       </div>
     </div>
 </template>
@@ -28,21 +28,23 @@ export default {
   props: {
     button: String,
     editEmail: String,
+    addFunction: Function,
   },
   mounted () {
     if (this.button === 'Guardar cambios') {
       this.email = this.editEmail;
     } 
   },
-  methods: {
-    addFunction() {
-      this.$emit('click', {
-        password: this.password,
+  computed: {
+    userObj() {
+      return {
         email: this.email,
+        password: this.password,
         role: this.role,
-      });
-      console.log(this.role);
-    },
+      }
+    }
+  },
+  methods: {
   }
 };
 </script>
