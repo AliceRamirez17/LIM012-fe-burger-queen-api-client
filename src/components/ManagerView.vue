@@ -1,10 +1,11 @@
 <template>
   <div class="manager">
     <nav-component fullname="manager" :style="employeeList ? colorEmployees : colorProducts "/>
-    <router-link to="" tag="button" class="btn-prev" :style="employeeList ? colorEmployees : colorProducts"></router-link>
+    <button @click="clickPrev" class="btn-prev" :style="employeeList ? colorEmployees : colorProducts"></button>
     <EmployeeList v-if="employeeList" :users="users" @click="getUserData"/>
-    <ProductsList v-if="productsList" :products="products"/>
-    <router-link to="" tag="button" class="btn-next" :style="employeeList ? colorEmployees : colorProducts"></router-link>
+    <ProductsList ref="ProductsList" v-if="productsList" :products="products"/>
+    <button @click="clickNext" class="btn-next" :style="employeeList ? colorEmployees : colorProducts"></button>
+    <!-- <router-link to="" tag="button" class="btn-next" :style="employeeList ? colorEmployees : colorProducts"></router-link> -->
     <div class="new-employee">
         <h3>{{ employeeList ? 'Agregar trabajador' : 'Agregar producto' }}</h3>
         <button class="btn-new-employee" @click="modal=true"></button>
@@ -58,6 +59,8 @@ export default {
       product: {},
     };
   },
+  props: {
+  },
   components: {
     NavComponent,
     EmployeeList,
@@ -98,6 +101,12 @@ export default {
     showProducts(){
       this.productsList = true,
       this.employeeList = false
+    },
+    clickPrev(){
+      this.$refs.ProductsList.decrease();
+    },
+    clickNext(){
+      this.$refs.ProductsList.increase();
     }
   }
 };

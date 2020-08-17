@@ -1,6 +1,6 @@
 <template>
     <div class="products-list">
-        <div v-for="(product, index) in products" :key="index" class="each-product">
+        <div v-for="(product, index) in show" :key="index" class="each-product">
             <div class="product-img">
                 <img :src="product.image" alt="">
             </div>
@@ -14,9 +14,27 @@
 
 export default {
     name: 'productsList',
+    data() {
+        return {
+            page: 0,
+        }
+    },
     props: {
         products: Array,
-    }, 
+    },
+    computed: {
+        show(){
+            return this.products.slice(this.page*6, this.page*6 + 6)
+        }
+    },
+    methods: {
+        increase(){
+            this.page++;
+        },
+        decrease(){
+            this.page--;
+        }
+    }
 }
 </script>
 
@@ -30,12 +48,11 @@ export default {
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        overflow-y: scroll;
 
         .each-product {
             display: flex;
             position: relative;
-            width: 33.33%;
+            width: 32%;
             height: 200px;
             flex-direction: column;
             align-items: center;
