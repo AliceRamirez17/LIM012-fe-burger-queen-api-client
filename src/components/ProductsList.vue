@@ -35,7 +35,7 @@ export default {
         .each-product {
             display: flex;
             position: relative;
-            width: 260px;
+            width: 33.33%;
             height: 200px;
             flex-direction: column;
             align-items: center;
@@ -46,12 +46,12 @@ export default {
             h3 {
                 font-family: Livvic, Helvetica, Arial, sans-serif;
                 font-size: 25px;
-                width: 100%;
+                width: 80%;
             }
 
             .product-img {
                 width: 100%;
-                height: 120px;
+                height: 60%;
                 
                 img {
                     width: 100%;
