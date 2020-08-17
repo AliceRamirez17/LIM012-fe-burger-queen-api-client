@@ -70,7 +70,7 @@ export default {
   .employees-list {
       display: flex;
       width: 90%;
-      overflow: scroll;
+      overflow-y: scroll;
       grid-column: 2 / 3;
       grid-row: 2 / 3;
       flex-direction: column;
@@ -108,7 +108,12 @@ export default {
         }
 
         .edit-employee-btn {
+          background-color: #00C7D4;
+          border-radius: 10px;
           background-image: url(../assets/btn-edit.svg);
+          background-size: 70%;
+          background-repeat: no-repeat;
+          background-position: center;
         }
 
         .delete-employee-btn {
