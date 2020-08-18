@@ -41,7 +41,7 @@ export default {
       const userToEdit = this.users.filter(function(user) {
         return index === user._id;
       });
-      this.$emit('click', userToEdit[0]);
+      this.choice = userToEdit[0];
       this.email = userToEdit[0].email;
     },
     showConfirmationModal(index) {

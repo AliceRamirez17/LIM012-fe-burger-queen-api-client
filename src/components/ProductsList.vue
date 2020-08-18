@@ -5,22 +5,29 @@
                 <img :src="product.image" alt="">
             </div>
             <h3> {{ product.name }} </h3>
-            <button class="edit-product-btn"></button>
+            <button @click="showEditProductModal(product._id)" class="edit-product-btn"></button>
         </div>
+        <modal-product v-if="modal" @close="modal=false" button="Guardar cambios"/>
     </div>
 </template>
 
 <script>
+
+import ModalProduct from './ModalProduct.vue'
 
 export default {
     name: 'productsList',
     data() {
         return {
             page: 0,
+            modal: false,
         }
     },
     props: {
         products: Array,
+    },
+    components: {
+        ModalProduct,
     },
     computed: {
         show(){
@@ -33,7 +40,14 @@ export default {
         },
         decrease(){
             this.page--;
-        }
+        },
+        showEditProductModal(index) {
+            this.modal = true;
+            const productToEdit = this.products.filter(function(product) {
+                return index === product._id;
+            });
+            this.choice = productToEdit[0];
+        },
     }
 }
 </script>
