@@ -2,9 +2,13 @@
     <div class="modal">
         <div class="modal-product">
             <h2>Imagen</h2>
+            <input type="file" accept=".jpg, .png" required>
             <h2>Nombre de producto</h2>
-            <h2>Cantidad en existencia</h2>
+            <input type="text">
+            <h2>Cantidad</h2>
+            <input type="number">
             <h2>Precio</h2>
+            <input type="text">
             <button class="btn-close-modal" @click="$emit('close')"></button>
             <button class="submit-modal">{{ button }}</button>
         </div>
@@ -53,6 +57,21 @@ export default {
             background-color: white;
             border-radius: 20px;
             padding: 40px;
+
+            h2 {
+                text-align: left;
+            }
+
+            input {
+                width: 300px;
+                height: 45px;
+                border-radius: 10px;
+                border-style: none;
+                border: 1px solid black;
+                outline: none;
+                font-size: 22px;
+                padding-left: 5px;
+            }
 
             .btn-close-modal {
                 position: absolute;

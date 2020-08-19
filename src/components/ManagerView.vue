@@ -5,12 +5,12 @@
     <EmployeeList v-if="employeeList" :users="users" @click="getUserData"/>
     <ProductsList ref="ProductsList" v-if="productsList" :products="products"/>
     <button @click="clickNext" class="btn-next" :style="employeeList ? colorEmployees : colorProducts"></button>
-    <!-- <router-link to="" tag="button" class="btn-next" :style="employeeList ? colorEmployees : colorProducts"></router-link> -->
-    <div class="new-employee">
+    <div class="new-item">
         <h3>{{ employeeList ? 'Agregar trabajador' : 'Agregar producto' }}</h3>
-        <button class="btn-new-employee" @click="modal=true"></button>
+        <button class="btn-new-item" @click="employeeList ? modalEmp=true : modalProd=true"></button>
     </div>
-    <modal-employee v-if="modal" @close="modal=false" :addFunction="handleAddEmployee" :user="user" button="Agregar Trabajador" />
+    <modal-employee v-if="modalEmp" @close="modalEmp=false" :addFunction="handleAddEmployee" :user="user" button="Agregar trabajador" />
+    <modal-product v-if="modalProd" @close="modalProd=false" button="Agregar producto" />
     <div class="buttons">
         <button @click="showEmployees" class="btn-manager" :style="employeeList ? styleObj1 : 'none'">Trabajadores</button>
         <button @click="showProducts" class="btn-manager" :style="productsList ? styleObj2 : 'none'">Productos</button>
@@ -25,7 +25,8 @@ import { getProducts } from '../controllers/products.js'
 import NavComponent from './NavComponent.vue';
 import EmployeeList from './EmployeeList.vue';
 import ModalEmployee from './ModalEmployee.vue';
-import ProductsList from './ProductsList';
+import ProductsList from './ProductsList.vue';
+import ModalProduct from './ModalProduct.vue';
 
 const token = 'qwerryuipuq';
 
@@ -33,7 +34,8 @@ export default {
   name: 'managerView',
   data() {
     return {
-      modal: false,
+      modalEmp: false,
+      modalProd: false,
       productsList: false,
       employeeList: true,
       users: [],
@@ -66,6 +68,7 @@ export default {
     EmployeeList,
     ModalEmployee,
     ProductsList,
+    ModalProduct,
   },
   mounted () {
     getEmployees(token)
@@ -89,7 +92,7 @@ export default {
       }
       addEmployee(token, objEmployee)
         .then(response => (this.users = [...this.users, response]))
-        .then(this.modal = false)
+        .then(this.modalEmp = false)
     },
     getUserData(user){
       console.log(user.email);
@@ -159,7 +162,7 @@ export default {
       background-image: url(../assets/arrow-next.svg);
     }
 
-    .new-employee {
+    .new-item {
       grid-column: 3 / 4;
       grid-row: 2 / 3;
       height: 30%;
@@ -175,7 +178,7 @@ export default {
         margin-bottom: 10px;
       }
 
-      .btn-new-employee {
+      .btn-new-item {
         @include width-height(65px, 65px);
         outline: none;
         cursor: pointer;
