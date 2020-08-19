@@ -51,8 +51,8 @@ export const addEmployee = (token, data) => {
 
 // PUT -> EDIT //
 
-export const editEmployee = (token, data) => {
-  return fetch('http://localhost:3000/users', {
+export const editEmployee = (token, data, id) => {
+  return fetch(`http://localhost:3000/users/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
     headers:{
