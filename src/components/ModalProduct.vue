@@ -5,10 +5,10 @@
             <input type="file" accept=".jpg, .png" required>
             <h2>Nombre de producto</h2>
             <input type="text">
-            <h2>Cantidad</h2>
-            <input type="number">
-            <h2>Precio</h2>
+            <h2>Categoría</h2>
             <input type="text">
+            <h2>Precio</h2>
+            <input type="number">
             <button class="btn-close-modal" @click="$emit('close')"></button>
             <button class="submit-modal">{{ button }}</button>
         </div>

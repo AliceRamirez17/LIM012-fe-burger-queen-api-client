@@ -28,11 +28,17 @@ export default {
   props: {
     button: String,
     editEmail: String,
+    editRole: Boolean,
     addFunction: Function,
   },
   mounted () {
     if (this.button === 'Guardar cambios') {
       this.email = this.editEmail;
+      if (this.editRole === true) {
+        this.role = "Administrador"
+      } else {
+        this.role = "Usuario"
+      }
     } 
   },
   computed: {

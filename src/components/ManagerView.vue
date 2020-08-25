@@ -2,7 +2,7 @@
   <div class="manager">
     <nav-component fullname="manager" :style="employeeList ? colorEmployees : colorProducts "/>
     <button @click="clickPrev" class="btn-prev" :style="employeeList ? colorEmployees : colorProducts"></button>
-    <EmployeeList v-if="employeeList" :users="users" @click="getUserData"/>
+    <EmployeeList v-if="employeeList" :users="users" />
     <ProductsList ref="ProductsList" v-if="productsList" :products="products"/>
     <button @click="clickNext" class="btn-next" :style="employeeList ? colorEmployees : colorProducts"></button>
     <div class="new-item">
@@ -20,7 +20,7 @@
 
 <script>
 import { getEmployees, addEmployee } from '../controllers/users.js'
-import { getProducts } from '../controllers/products.js'
+import { getProducts, addProduct } from '../controllers/products.js'
 
 import NavComponent from './NavComponent.vue';
 import EmployeeList from './EmployeeList.vue';
@@ -94,8 +94,15 @@ export default {
         .then(response => (this.users = [...this.users, response]))
         .then(this.modalEmp = false)
     },
-    getUserData(user){
-      console.log(user.email);
+    handleAddProduct(obj) {
+      const objProduct = {
+        name: obj.name,
+        price: obj.price,
+        image: obj.image,
+        type: obj.type,
+      }
+      addProduct(token, objProduct)
+        
     },
     showEmployees(){
       this.employeeList = true,

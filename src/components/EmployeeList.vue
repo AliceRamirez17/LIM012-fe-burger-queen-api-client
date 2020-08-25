@@ -9,6 +9,7 @@
       <confirmation-modal v-if="confirmation" @close="confirmation=false, choice={}" :addFunction="handleDeleteEmployee"/>
       <modal-employee v-if="modal" @close="modal=false"
         :editEmail="email"
+        :editRole="role"
         :addFunction="handleEditEmployee"
         button="Guardar cambios"
       />
@@ -47,6 +48,7 @@ export default {
       });
       this.choice = userToEdit[0];
       this.email = this.choice.email;
+      this.role = this.choice.role.admin;
     },
     showConfirmationModal(index) {
       console.log('i clicked');
@@ -71,7 +73,6 @@ export default {
       editEmployee(token, this.choice, this.choice._id)
         .then((resp) => {
           console.log(resp)
-          console.log(this.choice)
         })
     },
   },
