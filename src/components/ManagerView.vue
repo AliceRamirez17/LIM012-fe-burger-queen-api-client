@@ -96,14 +96,17 @@ export default {
     },
     handleAddProduct(obj) {
       const objProduct = {
+        // id lo proporciona la API
         name: obj.name,
         price: obj.price,
         image: obj.image,
         type: obj.type,
       }
       addProduct(token, objProduct)
-        .then(response => (this.products = [...this.products, response]))
-        .then(console.log(objProduct))
+        .then(response => {
+          this.products = [...this.products, response],
+          console.log(response)
+          })
         .then(this.modalProd = false)
     },
     showEmployees(){

@@ -28,6 +28,9 @@ export default {
     props: {
         button: String,
         addFunction: Function,
+        editName: String,
+        editType: String,
+        editPrice: Number
     },
     computed: {
         productObj() {
@@ -37,6 +40,13 @@ export default {
                 price: this.price,
                 type: this.type,
             }
+        }
+    },
+    mounted() {
+        if (this.button === 'Guardar cambios') {
+            this.name = this.editName
+            this.type = this.editType
+            this.price = this.editPrice
         }
     }
 }

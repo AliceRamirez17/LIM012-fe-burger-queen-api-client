@@ -7,7 +7,11 @@
             <h3> {{ product.name }} </h3>
             <button @click="showEditProductModal(product._id)" class="edit-product-btn"></button>
         </div>
-        <modal-product v-if="modal" @close="modal=false" button="Guardar cambios"/>
+        <modal-product v-if="modal" @close="modal=false"
+        :editName="name"
+        :editType="type"
+        :editPrice="price"
+        button="Guardar cambios"/>
     </div>
 </template>
 
@@ -21,6 +25,7 @@ export default {
         return {
             page: 0,
             modal: false,
+            choice: {},
         }
     },
     props: {
@@ -47,6 +52,9 @@ export default {
                 return index === product._id;
             });
             this.choice = productToEdit[0];
+            this.name = this.choice.name;
+            this.type = this.choice.type;
+            this.price = this.choice.price;
         },
     }
 }
