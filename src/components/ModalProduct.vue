@@ -4,13 +4,13 @@
             <h2>Imagen</h2>
             <input type="file" accept=".jpg, .png" required>
             <h2>Nombre de producto</h2>
-            <input type="text">
+            <input type="text" v-model="name">
             <h2>Categoría</h2>
-            <input type="text">
+            <input type="text" v-model="type">
             <h2>Precio</h2>
-            <input type="number">
+            <input type="number" v-model="price">
             <button class="btn-close-modal" @click="$emit('close')"></button>
-            <button class="submit-modal">{{ button }}</button>
+            <button class="submit-modal" @click="addFunction(productObj)">{{ button }}</button>
         </div>
     </div>
 </template>
@@ -19,13 +19,26 @@
 export default {
     data() {
         return {
-
+            image: '',
+            name: '',
+            price: '',
+            type: '',
         }
     },
     props: {
         button: String,
         addFunction: Function,
     },
+    computed: {
+        productObj() {
+            return {
+                image: this.image,
+                name: this.name,
+                price: this.price,
+                type: this.type,
+            }
+        }
+    }
 }
 </script>
 

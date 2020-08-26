@@ -10,7 +10,7 @@
         <button class="btn-new-item" @click="employeeList ? modalEmp=true : modalProd=true"></button>
     </div>
     <modal-employee v-if="modalEmp" @close="modalEmp=false" :addFunction="handleAddEmployee" :user="user" button="Agregar trabajador" />
-    <modal-product v-if="modalProd" @close="modalProd=false" button="Agregar producto" />
+    <modal-product v-if="modalProd" @close="modalProd=false" :addFunction="handleAddProduct" button="Agregar producto" />
     <div class="buttons">
         <button @click="showEmployees" class="btn-manager" :style="employeeList ? styleObj1 : 'none'">Trabajadores</button>
         <button @click="showProducts" class="btn-manager" :style="productsList ? styleObj2 : 'none'">Productos</button>
@@ -102,7 +102,9 @@ export default {
         type: obj.type,
       }
       addProduct(token, objProduct)
-        
+        .then(response => (this.products = [...this.products, response]))
+        .then(console.log(objProduct))
+        .then(this.modalProd = false)
     },
     showEmployees(){
       this.employeeList = true,

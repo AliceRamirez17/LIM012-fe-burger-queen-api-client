@@ -14,7 +14,7 @@ export const getProducts = (token) => {
 // POST -> ADD //
 
 export const addProduct = (token, data) => {
-  return fetch('http://localhost:3000/product', {
+  return fetch('http://localhost:3000/products', {
     method: 'POST',
     body: JSON.stringify(data),
     headers:{
