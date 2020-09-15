@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Credentials from '../components/CredentialsView';
+import Home from '../views/Home';
 
 Vue.use(VueRouter);
 
@@ -11,8 +12,13 @@ const routes = [
     component: Credentials,
   },
   {
-    path: '/manager/employees',
-    name: 'Manager',
+    path: '/home',
+    name: 'options',
+    component: Home,
+  },
+  {
+    path: '/employees',
+    name: 'Employees',
     component: () => import(/* webpackChunkName: "about" */ '../components/ManagerView'),
   },
 ];

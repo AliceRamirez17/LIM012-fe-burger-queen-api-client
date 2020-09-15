@@ -1,6 +1,10 @@
 <template>
   <div class="manager">
     <nav-component fullname="manager" :style="employeeList ? colorEmployees : colorProducts "/>
+    <div class="container-back">
+        <h3>Regresar</h3>
+        <router-link to="/home" class="btn-back"></router-link>
+    </div>
     <button @click="clickPrev" class="btn-prev" :style="employeeList ? colorEmployees : colorProducts"></button>
     <EmployeeList v-if="employeeList" :users="users" />
     <ProductsList ref="ProductsList" v-if="productsList" :products="products"/>
@@ -146,6 +150,30 @@ export default {
       display: grid;
       grid-template-columns: 10% 80% 10%;
       grid-template-rows: 10% 78% 12%;
+    }
+
+    .container-back {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: end;
+        align-items: center;
+
+        h3 {
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .btn-back {
+            @include width-height(65px, 65px);
+            outline: none;
+            cursor: pointer;
+            @include background-img(transparent,'../assets/btn-back.svg', contain, none, 50%);
+            background-size: cover;
+        }
     }
 
     .btn-prev, .btn-next {

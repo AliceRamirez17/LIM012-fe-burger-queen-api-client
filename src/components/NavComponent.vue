@@ -29,12 +29,13 @@ export default {
         padding: 0 40px;
         box-sizing: border-box;
         grid-column: 1 / 4;
-        background-color: #00C7D4;
+        background-color: black;
 
         h2 {
             font-family: Livvic, Helvetica, Arial, sans-serif;
             font-size: 28px;
             font-weight: 500;
+            color: white;
         }
 
         .sign-out {

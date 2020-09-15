@@ -5,7 +5,7 @@
       <h2>Inicia sesión</h2>
       <input v-model="email" class="input" type="email" placeholder="email">
       <input v-model="password" class="input" type="password" placeholder="contraseña">
-      <router-link to="/manager/employees" tag="button" class="login-btn" 
+      <router-link to="/home" tag="button" class="login-btn" 
       @click.native="handleSendForm" >
         Entrar
       </router-link>
@@ -35,7 +35,7 @@ export default {
           console.log(userCredentials, resp);
           if (resp.token){
             window.localStorage.setItem('token', resp.token);
-            this.$router.push('/manager/employees');
+            this.$router.push('/home');
           }
         })
     },
