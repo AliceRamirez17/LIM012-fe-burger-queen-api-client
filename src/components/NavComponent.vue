@@ -1,7 +1,7 @@
 <template>
     <div class="nav-style">
-        <H2>¡Bienvenido {{ fullname }}!</H2>
-        <router-link to="/" tag="h2" class="sign-out" 
+        <H2 :style="colorFont">¡Bienvenido {{ fullname }}!</H2>
+        <router-link to="/" tag="h2" class="sign-out" :style="colorFont"
         @click="logout">Cerrar sesión</router-link>
     </div>
 </template>
@@ -11,6 +11,7 @@ export default {
   name: 'NavComponent',
   props: {
     fullname: String,
+    colorFont: Object,
   },
   methods: {
       logout(){
@@ -29,13 +30,11 @@ export default {
         padding: 0 40px;
         box-sizing: border-box;
         grid-column: 1 / 4;
-        background-color: black;
 
         h2 {
             font-family: Livvic, Helvetica, Arial, sans-serif;
             font-size: 28px;
             font-weight: 500;
-            color: white;
         }
 
         .sign-out {

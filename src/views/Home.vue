@@ -1,6 +1,6 @@
 <template>
     <div class="options-container">
-        <nav-component fullname="manager"></nav-component>
+        <nav-component fullname="manager" :style="colorHome" :colorFont="colorFont"></nav-component>
         <section class="img-container">
             <img src="../assets/burger-queer-logo.png" alt="">
         </section>
@@ -15,6 +15,16 @@
 import NavComponent from '../components/NavComponent.vue';
 
 export default {
+    data() {
+        return {
+            colorHome: {
+                'background-color': 'black',
+            },
+            colorFont: {
+                'color': 'white',
+            }
+        }
+    },
     components: {
         NavComponent
     }

@@ -132,6 +132,8 @@ export default {
 </script>
 
 <style lang="scss">
+    @import "../scss/main.scss";
+
     @mixin background-img($color, $url, $size, $border, $radius) {
       background-color: $color;
       background-image: url($url);
@@ -233,17 +235,5 @@ export default {
       grid-column: 1 / 4;
       grid-row: 3 / 4;
       border-top: 1px solid black;
-
-      .btn-manager {
-        @include width-height(460px, 60px);
-        font-size: 30px;
-        font-weight: 800;
-        border-radius: 10px;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        background-color: white;
-        border: 1px solid black;
-      }
     }
 </style>

@@ -21,6 +21,11 @@ const routes = [
     name: 'Employees',
     component: () => import(/* webpackChunkName: "about" */ '../components/ManagerView'),
   },
+  {
+    path: '/create-order',
+    name: 'CreateOrder',
+    component: () => import(/* webpackChunkName: "about" */ '../components/EmployeeView'),
+  }
 ];
 
 const router = new VueRouter({
