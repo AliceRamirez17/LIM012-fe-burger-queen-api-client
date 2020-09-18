@@ -1,8 +1,8 @@
 <template>
     <div class="new-order-container">
         <div class="food-options">
-            <button>Desayuno</button>
-            <button>Almuerzo</button>
+            <v-btn>Desayuno</v-btn>
+            <v-btn>Almuerzo</v-btn>
         </div>
         <div class="resume-order">
             <h1>Enviar pedido</h1>
