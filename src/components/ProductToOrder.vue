@@ -1,8 +1,8 @@
 <template>
     <div class="products-to-order">
         <button v-for="(product, index) in breakfast" :key="index" class="each-product-to-order">
-            <h4 :style="colorStyle"> {{ product.name }} </h4>
-            <h3> {{ 'S/ ' + product.price }} </h3>
+            <h5> {{ product.name }} </h5>
+            <h3 :style="colorStyle"> {{ 'S/ ' + product.price }} </h3>
         </button>
         <button class="each-product-to-order extra" :style="colorStyle">EXTRAS</button>
     </div>
@@ -44,15 +44,17 @@ export default {
             display: flex;
             flex-direction: column;
             align-items: center;
-            @include width-height(120px, 80px);
+            @include width-height(110px, 70px);
             border: 1px solid black;
             border-radius: 10px;
 
-            h4 {
+            h5 {height: 50%}
+
+            h3 {
                 width: 100%;
                 height: 50%;
-                border-top-right-radius: 10px;
-                border-top-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                border-bottom-left-radius: 10px;
             }
         }
 

@@ -12,20 +12,22 @@
                     <v-expansion-panel>
                         <v-expansion-panel-header>Almuerzo</v-expansion-panel-header>
                         <v-expansion-panel-content>
-                            <product-to-order :products="products" :type="type2" :colorStyle="type2 ? colorLunch : 'none'"></product-to-order>
+                            <product-to-order :products="products" :type="type2" :colorStyle="type2 ? colorLunch : 'none'" />
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </v-expansion-panels>
             </template>
         </div>
         <div class="resume-order">
-            <h1>Enviar pedido</h1>
+            <sum-order />
+            <button class="send-order" :style="btnColor">Enviar pedido</button>
         </div>
     </div>
 </template>
 
 <script>
 import ProductToOrder from './ProductToOrder.vue';
+import SumOrder from './SumOrderComponent.vue';
 import { getProducts } from '../controllers/products.js'
 
 const token = 'qwerryuipuq';
@@ -44,8 +46,12 @@ export default {
             }
         }
     },
+    props: {
+        btnColor: Object
+    },
     components: {
-        ProductToOrder
+        ProductToOrder,
+        SumOrder
     },
     mounted () {
     getProducts(token)
@@ -62,7 +68,7 @@ export default {
 
     .new-order-container {
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 48% 4% 48%;
         grid-column: 2 / 3;
         grid-row: 2 / 3;
         padding: 40px 0;
@@ -77,7 +83,16 @@ export default {
         }
 
         .resume-order {
-            grid-column: 2 / 3;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            grid-column: 3 / 4;
+            justify-content: space-between;
+
+            .send-order {
+                width: 100%;
+                height: 10%;
+            }
         }
     }
 

@@ -2,7 +2,7 @@
     <div class="create-order-container">
         <nav-component fullname="employee" :style="colorEmployee"></nav-component>
         <btn-back linkBack="/home" />
-        <new-order v-if="newOrder"/>
+        <new-order v-if="newOrder" :btnColor="colorEmployee"/>
         <order-list v-if="orderList"/>
         <div class="buttons-employee">
             <button class="btn-manager" :style="newOrder ? colorEmployee : 'none'">Nuevo pedido</button>
