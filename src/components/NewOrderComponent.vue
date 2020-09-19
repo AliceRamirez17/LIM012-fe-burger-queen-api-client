@@ -6,13 +6,13 @@
                     <v-expansion-panel>
                         <v-expansion-panel-header class="green accent-3">Desayuno</v-expansion-panel-header>
                         <v-expansion-panel-content>
-                            <product-to-order :products="products" :type="type1"></product-to-order>
+                            <product-to-order :products="products" :type="type1" :colorStyle="type1 ? colorBreakfast : 'none'"></product-to-order>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                     <v-expansion-panel>
                         <v-expansion-panel-header>Almuerzo</v-expansion-panel-header>
                         <v-expansion-panel-content>
-                            <product-to-order :products="products" :type="type2"></product-to-order>
+                            <product-to-order :products="products" :type="type2" :colorStyle="type2 ? colorLunch : 'none'"></product-to-order>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </v-expansion-panels>
@@ -35,7 +35,13 @@ export default {
         return {
             products: [],
             type1: 'breakfast',
-            type2: 'lunch'
+            type2: 'lunch',
+            colorBreakfast: {
+                'background-color': '#00E676'
+            },
+            colorLunch: {
+                'background-color': '#FF5E53'
+            }
         }
     },
     components: {
@@ -59,9 +65,15 @@ export default {
         grid-template-columns: 50% 50%;
         grid-column: 2 / 3;
         grid-row: 2 / 3;
+        padding: 40px 0;
+        box-sizing: border-box;
 
         .food-options {
             grid-column: 1 / 2;
+
+            product-to-order {
+                padding: 0;
+            }
         }
 
         .resume-order {
