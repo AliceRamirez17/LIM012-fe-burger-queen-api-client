@@ -1,14 +1,15 @@
 <template>
     <div class="products-to-order">
-        <div v-for="(product, index) in breakfast" :key="index" class="each-product-to-order">
-            <h3> {{ product.name }} </h3>
+        <button v-for="(product, index) in breakfast" :key="index" class="each-product-to-order">
+            <h4> {{ product.name }} </h4>
             <h3> {{ product.price }} </h3>
-        </div>
+        </button>
     </div>
 </template>
 
 <script>
 export default {
+    name: 'ProductToOrder',
     data() {
         return {
 
@@ -16,10 +17,11 @@ export default {
     },
     props: {
         products: Array,
+        type: String,
     },
     computed: {
         breakfast(){
-            return this.products.filter( product => product.type = "breakfast" )
+            return this.products.filter(product => product.type === this.type)
         }
     },
 }
@@ -33,6 +35,12 @@ export default {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        justify-content: space-between;
+
+        .each-product-to-order {
+            @include width-height(120px, 80px);
+            border: 1px solid black;
+        }
     }
 
 </style>

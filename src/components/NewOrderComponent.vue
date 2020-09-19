@@ -5,12 +5,14 @@
                 <v-expansion-panels>
                     <v-expansion-panel>
                         <v-expansion-panel-header class="green accent-3">Desayuno</v-expansion-panel-header>
-                        <v-expansion-panel-content>Info</v-expansion-panel-content>
+                        <v-expansion-panel-content>
+                            <product-to-order :products="products" :type="type1"></product-to-order>
+                        </v-expansion-panel-content>
                     </v-expansion-panel>
                     <v-expansion-panel>
                         <v-expansion-panel-header>Almuerzo</v-expansion-panel-header>
                         <v-expansion-panel-content>
-                            <breakfast-to-order :products="products"></breakfast-to-order>
+                            <product-to-order :products="products" :type="type2"></product-to-order>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </v-expansion-panels>
@@ -23,7 +25,7 @@
 </template>
 
 <script>
-import BreakfastToOrder from './BreakfastToOrder.vue';
+import ProductToOrder from './ProductToOrder.vue';
 import { getProducts } from '../controllers/products.js'
 
 const token = 'qwerryuipuq';
@@ -32,10 +34,12 @@ export default {
     data() {
         return {
             products: [],
+            type1: 'breakfast',
+            type2: 'lunch'
         }
     },
     components: {
-        BreakfastToOrder
+        ProductToOrder
     },
     mounted () {
     getProducts(token)
