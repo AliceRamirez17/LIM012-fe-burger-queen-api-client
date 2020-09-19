@@ -25,6 +25,13 @@ $color3: black;
     height: $height;
 }
 
+@mixin background-img($color, $url, $size, $border, $radius) {
+    background-color: $color;
+    background-image: url($url);
+    background-size: $size;
+    border: $border;
+    border-radius: $radius;
+}
 
 @media (min-width: 768px) {
     

@@ -1,14 +1,14 @@
 <template>
     <div class="modal">
       <div class="modal-employee">
-          <h2>Email</h2>
+          <label>Email</label>
           <input type="email" v-model="email">
-          <h2>Password</h2>
+          <label>Password</label>
           <input type="password" v-model="password">
-          <h2>Puesto</h2>
-          <select v-model="role">
-            <option>Administrador</option>
-            <option>Usuario</option>
+          <label for="role">Puesto</label>
+          <select v-model="role" id="role">
+            <option selected>Administrador</option>
+            <option >Usuario</option>
           </select>
           <button class="btn-close-modal" @click="$emit('close')"></button>
           <button class="submit-modal" @click="addFunction(userObj)">{{ button }}</button>
@@ -84,7 +84,9 @@ export default {
             border-radius: 20px;
             padding: 40px;
 
-            h2 {
+            label {
+                font-size: 24px;
+                font-weight: 800;
                 text-align: left;
             }
 
@@ -120,7 +122,14 @@ export default {
                 font-size: 28px;
                 font-weight: 600;
                 outline: none;
-              cursor: pointer;
+                cursor: pointer;
+            }
+
+            select {
+              width: 300px;
+              height: 45px;
+              border-radius: 10px;
+              border: 1px solid black;
             }
         }
     }

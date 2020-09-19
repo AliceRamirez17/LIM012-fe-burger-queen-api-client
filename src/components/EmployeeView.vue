@@ -1,6 +1,7 @@
 <template>
     <div class="create-order-container">
         <nav-component fullname="employee" :style="colorEmployee"></nav-component>
+        <btn-back linkBack="/home" />
         <new-order v-if="newOrder"/>
         <order-list v-if="orderList"/>
         <div class="buttons-employee">
@@ -14,6 +15,7 @@
 import navComponent from './NavComponent.vue';
 import newOrder from './NewOrderComponent.vue';
 import orderList from './OrderListComponent';
+import BtnBack from './BtnBackComponent.vue';
 
 export default {
     data() {
@@ -29,7 +31,8 @@ export default {
     components: {
         navComponent,
         newOrder,
-        orderList
+        orderList,
+        BtnBack
     }
     
 }

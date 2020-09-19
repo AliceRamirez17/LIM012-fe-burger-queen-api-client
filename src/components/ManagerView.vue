@@ -1,10 +1,7 @@
 <template>
   <div class="manager">
     <nav-component fullname="manager" :style="employeeList ? colorEmployees : colorProducts "/>
-    <div class="container-back">
-        <h3>Regresar</h3>
-        <router-link to="/home" class="btn-back"></router-link>
-    </div>
+    <btn-back linkBack="/home" />
     <button @click="clickPrev" class="btn-prev" :style="employeeList ? colorEmployees : colorProducts"></button>
     <EmployeeList v-if="employeeList" :users="users" />
     <ProductsList ref="ProductsList" v-if="productsList" :products="products"/>
@@ -31,6 +28,7 @@ import EmployeeList from './EmployeeList.vue';
 import ModalEmployee from './ModalEmployee.vue';
 import ProductsList from './ProductsList.vue';
 import ModalProduct from './ModalProduct.vue';
+import BtnBack from './BtnBackComponent.vue';
 
 const token = 'qwerryuipuq';
 
@@ -73,6 +71,7 @@ export default {
     ModalEmployee,
     ProductsList,
     ModalProduct,
+    BtnBack,
   },
   mounted () {
     getEmployees(token)
@@ -134,48 +133,11 @@ export default {
 <style lang="scss">
     @import "../scss/main.scss";
 
-    @mixin background-img($color, $url, $size, $border, $radius) {
-      background-color: $color;
-      background-image: url($url);
-      background-size: $size;
-      border: $border;
-      border-radius: $radius;
-    }
-
-    @mixin width-height($width, $height) {
-      width: $width;
-      height: $height;
-    }
-
     .manager {
       height: 100vh;
       display: grid;
       grid-template-columns: 10% 80% 10%;
       grid-template-rows: 10% 78% 12%;
-    }
-
-    .container-back {
-        grid-column: 1 / 2;
-        grid-row: 2 / 3;
-        height: 30%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-self: end;
-        align-items: center;
-
-        h3 {
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
-
-        .btn-back {
-            @include width-height(65px, 65px);
-            outline: none;
-            cursor: pointer;
-            @include background-img(transparent,'../assets/btn-back.svg', contain, none, 50%);
-            background-size: cover;
-        }
     }
 
     .btn-prev, .btn-next {
