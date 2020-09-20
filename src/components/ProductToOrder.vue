@@ -1,6 +1,6 @@
 <template>
     <div class="products-to-order">
-        <button v-for="(product, index) in breakfast" :key="index" class="each-product-to-order">
+        <button v-for="(product, index) in newArrProducts" :key="index" class="each-product-to-order" @click="addPrice(index)">
             <h5> {{ product.name }} </h5>
             <h3 :style="colorStyle"> {{ 'S/ ' + product.price }} </h3>
         </button>
@@ -22,10 +22,18 @@ export default {
         colorStyle: Object
     },
     computed: {
-        breakfast(){
+        newArrProducts(){
             return this.products.filter(product => product.type === this.type)
         }
     },
+    methods: {
+        addPrice(index){
+            const productSelected = this.newArrProducts.filter(product => index === product._id)
+            console.log(index);
+            console.log(this.newArrProducts);
+            console.log(productSelected[0].price)
+        }
+    }
 }
 </script>
 

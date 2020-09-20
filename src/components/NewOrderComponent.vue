@@ -6,7 +6,7 @@
                     <v-expansion-panel>
                         <v-expansion-panel-header class="green accent-3">Desayuno</v-expansion-panel-header>
                         <v-expansion-panel-content>
-                            <product-to-order :products="products" :type="type1" :colorStyle="type1 ? colorBreakfast : 'none'"></product-to-order>
+                            <product-to-order :products="products" :type="type1" :colorStyle="type1 ? colorBreakfast : 'none'" />
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                     <v-expansion-panel>
@@ -54,11 +54,11 @@ export default {
         SumOrder
     },
     mounted () {
-    getProducts(token)
-      .then(response => {
-        return this.products = response
-      })
-  },
+        getProducts(token)
+        .then(response => {
+            return this.products = response
+        })
+    },
 }
 </script>
 
