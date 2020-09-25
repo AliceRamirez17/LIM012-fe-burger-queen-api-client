@@ -1,6 +1,6 @@
 <template>
     <div class="products-to-order">
-        <button v-for="(product, index) in newArrProducts" :key="index" class="each-product-to-order" @click="addPrice(index)">
+        <button v-for="(product, index) in newArrProducts" :key="index" class="each-product-to-order" @click="addPrice(product.name)">
             <h5> {{ product.name }} </h5>
             <h3 :style="colorStyle"> {{ 'S/ ' + product.price }} </h3>
         </button>
@@ -13,7 +13,8 @@ export default {
     name: 'ProductToOrder',
     data() {
         return {
-
+            qty: 0,
+            price: Number
         }
     },
     props: {
@@ -28,10 +29,13 @@ export default {
     },
     methods: {
         addPrice(index){
-            const productSelected = this.newArrProducts.filter(product => index === product._id)
-            console.log(index);
-            console.log(this.newArrProducts);
-            console.log(productSelected[0].price)
+            const productSelected = this.newArrProducts.filter(productList => index === productList.name)
+            // this.price = parseInt(productSelected[0].price)
+            const obj = {
+                name: productSelected[0].name,
+                price: parseInt(productSelected[0].price)
+            }
+            this.$emit('show', obj)
         }
     }
 }
