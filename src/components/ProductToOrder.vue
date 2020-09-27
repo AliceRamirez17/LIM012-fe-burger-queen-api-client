@@ -35,7 +35,7 @@ export default {
                 name: productSelected[0].name,
                 price: parseInt(productSelected[0].price)
             }
-            this.$emit('show', obj)
+            this.$emit('addProduct', obj)
         }
     }
 }
