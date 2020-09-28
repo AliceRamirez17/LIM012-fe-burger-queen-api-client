@@ -26,11 +26,13 @@
             <h3 class="title-resume">Resumen</h3>
             <div class="container-list">
                 <div v-for="(productSel, index) in listProductSelec" :key="index" class="product-selec">
+                    <button @click="addQty(productSel.name)"></button>
                     <p>{{ productSel.qty }}</p>
-                    <div class="name-price">
+                    <div class="name-btn">
                         <p>{{ productSel.name }}</p>
-                        <p>{{ productSel.price }}</p>
+                        <button @click="decQty(productSel.name)"></button>
                     </div>
+                    <p class="price-product">{{ 'S/' + productSel.price }}</p>
                 </div>
             </div>
             <div class="total-price">
@@ -82,12 +84,32 @@ export default {
         addProductToList(obj){
             this.listProductSelec.push(
                 this.eachProduct = {
-                    qty: this.qty+1,
+                    qty: this.qty + 1,
                     name: obj.name,
                     price: obj.price
                 }
             )
+            // if(this.listProductSelec.length > 0) {
+            //     for(let i = 0; i < this.listProductSelec; i++ ) {
+            //         for(let j = 0; j < this.listProductSelec; i++) {
+            //             if(this.eachProduct[i] === this.eachProduct[j]) {
+            //                 this.eachProduct.qty++
+            //             }
+            //         }
+            //     }
+            // }
             this.totalPrice = this.totalPrice + parseInt(this.eachProduct.price)
+        },
+        addQty(index){
+            if(index === this.eachProduct.name) {
+                this.eachProduct.qty++
+            }
+            
+        },
+        decQty(index){
+            if(index === this.eachProduct.name) {
+                this.eachProduct.qty--
+            }
         }
     }
 }
@@ -160,15 +182,32 @@ export default {
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
+                    margin-bottom: 5px;
 
-                    p{font-size: 20px}
+                    p{
+                        font-size: 16px
+                    }
 
-                    .name-price{
+                    button {
+                        width: 20px;
+                        height: 20px;
+                        background-image: url(../assets/btn-plus.svg);
+                        background-size: cover;
+                    }
+                    .name-btn {
                         display: flex;
                         flex-direction: row;
-                        width: 100%;
                         justify-content: space-between;
-                        margin-left: 10px;
+                        width: 70%;
+
+                        button {
+                            background-image: url(../assets/btn-less.svg);
+                        }
+                    }
+
+                    .price-product {
+                        width: 10%;
+                        text-align: right;
                     }
                 }
             }
@@ -190,6 +229,7 @@ export default {
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
                 grid-row: 5 / 6;
+                grid-column: 1 / 2;
                 font-size: 22px;
                 font-weight: 700;
             }
