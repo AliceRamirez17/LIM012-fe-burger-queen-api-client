@@ -4,17 +4,22 @@
             <h5> {{ product.name }} </h5>
             <h3 :style="colorStyle"> {{ 'S/ ' + product.price }} </h3>
         </button>
-        <button class="each-product-to-order extra" :style="colorStyle">EXTRAS</button>
+        <extra-modal v-if="modal" @close="modal=false" />
     </div>
 </template>
 
 <script>
+import ExtraModal from './ExtrasModal.vue'
 export default {
     name: 'ProductToOrder',
+    components: {
+        ExtraModal
+    },
     data() {
         return {
             qty: 0,
-            price: Number
+            price: Number,
+            modal: false
         }
     },
     props: {
@@ -36,6 +41,9 @@ export default {
                 price: parseInt(productSelected[0].price)
             }
             this.$emit('addProduct', obj)
+            if(index === 'Hamburguesa simple' || index === 'Hamburguesa doble') {
+                this.modal = true
+            }
         }
     }
 }

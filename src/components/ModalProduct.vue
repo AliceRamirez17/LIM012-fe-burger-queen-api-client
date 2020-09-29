@@ -52,7 +52,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
     @mixin background-img($color, $url, $size, $border, $radius) {
         background-color: $color;
         background-image: url($url);

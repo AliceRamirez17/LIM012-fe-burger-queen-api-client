@@ -26,11 +26,11 @@
             <h3 class="title-resume">Resumen</h3>
             <div class="container-list">
                 <div v-for="(productSel, index) in listProductSelec" :key="index" class="product-selec">
-                    <button @click="addQty(productSel.name)"></button>
+                    <button @click="addQty(productSel)"></button>
                     <p>{{ productSel.qty }}</p>
                     <div class="name-btn">
                         <p>{{ productSel.name }}</p>
-                        <button @click="decQty(productSel.name)"></button>
+                        <button @click="decQty(productSel)"></button>
                     </div>
                     <p class="price-product">{{ 'S/' + productSel.price }}</p>
                 </div>
@@ -63,6 +63,7 @@ export default {
                 'background-color': '#FF5E53'
             },
             listProductSelec: [],
+            arr:[],
             eachProduct: {},
             totalPrice: 0,
             qty: 0,
@@ -89,30 +90,29 @@ export default {
                     price: obj.price
                 }
             )
-            // if(this.listProductSelec.length > 0) {
-            //     for(let i = 0; i < this.listProductSelec; i++ ) {
-            //         for(let j = 0; j < this.listProductSelec; i++) {
-            //             if(this.eachProduct[i] === this.eachProduct[j]) {
-            //                 this.eachProduct.qty++
-            //             }
-            //         }
-            //     }
-            // }
             this.totalPrice = this.totalPrice + parseInt(this.eachProduct.price)
         },
-        addQty(index){
-            if(index === this.eachProduct.name) {
-                this.eachProduct.qty++
+        addQty(product){
+            this.totalPrice = this.totalPrice + product.price
+            const index = this.listProductSelec.indexOf(product)
+            if(index !== -1) {
+                product.qty++
             }
-            
         },
-        decQty(index){
-            if(index === this.eachProduct.name) {
-                this.eachProduct.qty--
-            }
+        decQty(product){
+            this.totalPrice = this.totalPrice - product.price
+            const index = this.listProductSelec.indexOf(product)
+            if(index !== -1) {
+                if(product.qty === 1){
+                    this.listProductSelec.splice(index, 1)
+                } else if (product.qty > 1){
+                    product.qty--
+                }
+            }  
         }
     }
 }
+
 </script>
 
 <style lang="scss">
