@@ -16,7 +16,6 @@ export default {
         return {
             qty: 0,
             price: Number,
-            arr: []
         }
     },
     props: {
@@ -27,9 +26,6 @@ export default {
     computed: {
         newArrProducts(){
             return this.products.filter(product => product.type === this.type)
-        },
-        arrExtras(){
-            return this.products.filter(product => product.type === 'extras')
         }
     },
     methods: {
@@ -42,11 +38,8 @@ export default {
             }
             this.$emit('addProduct', obj)
             if(index === 'Hamburguesa simple' || index === 'Hamburguesa doble') {
-                this.$emit('showModal')
+                this.$emit('showModal') 
             }
-        },
-        showExtras(){
-            this.arr = this.arrExtras
         }
     }
 }
@@ -62,24 +55,6 @@ export default {
         flex-wrap: wrap;
         justify-content: center;
         padding: 0;
-
-        .each-product-to-order {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            @include width-height(110px, 70px);
-            border: 1px solid black;
-            border-radius: 10px;
-
-            h5 {height: 50%}
-
-            h3 {
-                width: 100%;
-                height: 50%;
-                border-bottom-right-radius: 10px;
-                border-bottom-left-radius: 10px;
-            }
-        }
 
         .extra {
             justify-content: center;

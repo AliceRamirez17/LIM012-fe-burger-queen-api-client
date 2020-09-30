@@ -45,7 +45,22 @@
             </div>
             <button class="send-order" :style="btnColor">Enviar pedido</button>
         </div>
-        <extra-modal v-if="modal" @close="modal=false" :arr="arrEx"/>
+        <extra-modal v-if="modal" @close="modal=false">
+            <h2>Hamburguesa</h2>
+            <div class="extra-savour-container">
+                <button v-for="(savour, index) in arrSavour" :key="index" class="each-product-to-order">
+                    <h5> {{ savour.name }} </h5>
+                    <h3 :style="colorLunch"> {{ 'S/ ' + savour.price }} </h3>
+                </button>
+            </div>
+            <h2>Adicional</h2>
+            <div class="extra-savour-container">
+                <button v-for="(extra, index) in arrExtras" :key="index" class="each-product-to-order">
+                    <h5> {{ extra.name }} </h5>
+                    <h3 :style="colorLunch"> {{ 'S/ ' + extra.price }} </h3>
+                </button>
+            </div>
+        </extra-modal>
     </div>
 </template>
 
@@ -69,13 +84,10 @@ export default {
                 'background-color': '#FF5E53'
             },
             listProductSelec: [],
-            arr:[],
             eachProduct: {},
             totalPrice: 0,
             qty: 0,
             modal: false,
-            arrEx:[]
-
         }
     },
     props: {
@@ -90,6 +102,14 @@ export default {
         .then(response => {
             return this.products = response
         })
+    },
+    computed: {
+        arrSavour(){
+            return this.products.filter(product => product.type === 'savour')
+        },
+        arrExtras(){
+            return this.products.filter(product => product.type === 'extras')
+        }
     },
     methods: {
         addProductToList(obj){
@@ -122,7 +142,6 @@ export default {
         },
         showModal(){
             this.modal = true
-            this.arrEx = this.$refs.ProductToOrder.showExtras()
         }
     }
 }
@@ -248,6 +267,11 @@ export default {
                 font-size: 22px;
                 font-weight: 700;
             }
+        }
+
+        .extra-savour-container {
+            display: flex;
+            flex-direction: row;
         }
     }
 

@@ -2,10 +2,7 @@
     <div class="modal">
         <div class="modal-extra">
             <button class="btn-close-modal" @click="$emit('close')"></button>
-            <div v-for="(extra, index) in arr" :key="index" class="each-product-to-order">
-                <h5> {{ product.name }} </h5>
-                <h3 :style="colorStyle"> {{ 'S/ ' + product.price }} </h3>
-            </div>
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -13,7 +10,6 @@
 <script>
 export default {
     props: {
-        arr: Array
     }
 }
 </script>
@@ -37,6 +33,7 @@ export default {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            align-items: flex-start;
             width: 440px;
             height: 400px;
             background-color: white;
@@ -53,24 +50,6 @@ export default {
             outline: none;
             cursor: pointer;
             @include background-img(transparent,'../assets/btn-exit.svg', contain, none, 50%);
-        }
-
-        .each-product-to-order {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            @include width-height(110px, 70px);
-            border: 1px solid black;
-            border-radius: 10px;
-
-            h5 {height: 50%}
-
-            h3 {
-                width: 100%;
-                height: 50%;
-                border-bottom-right-radius: 10px;
-                border-bottom-left-radius: 10px;
-            }
         }
     }
 
