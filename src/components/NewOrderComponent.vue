@@ -6,13 +6,17 @@
                     <v-expansion-panel>
                         <v-expansion-panel-header class="green accent-3">Desayuno</v-expansion-panel-header>
                         <v-expansion-panel-content>
-                            <product-to-order :products="products" @addProduct="addProductToList" :type="type1" :colorStyle="type1 ? colorBreakfast : 'none'" />
+                            <product-to-order :products="products"
+                            @addProduct="addProductToList"
+                            :type="type1" :colorStyle="type1 ? colorBreakfast : 'none'" />
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                     <v-expansion-panel>
                         <v-expansion-panel-header>Almuerzo</v-expansion-panel-header>
                         <v-expansion-panel-content>
-                            <product-to-order :products="products" @addProduct="addProductToList" :type="type2" :colorStyle="type2 ? colorLunch : 'none'" />
+                            <product-to-order :products="products"
+                            @addProduct="addProductToList"
+                            :type="type2" :colorStyle="type2 ? colorLunch : 'none'" @showModal="showModal" />
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </v-expansion-panels>
@@ -41,12 +45,14 @@
             </div>
             <button class="send-order" :style="btnColor">Enviar pedido</button>
         </div>
+        <extra-modal v-if="modal" @close="modal=false" :arr="arrEx"/>
     </div>
 </template>
 
 <script>
 import ProductToOrder from './ProductToOrder.vue';
-import { getProducts } from '../controllers/products.js'
+import { getProducts } from '../controllers/products.js';
+import ExtraModal from './ExtrasModal.vue'
 
 const token = 'qwerryuipuq';
 
@@ -67,6 +73,9 @@ export default {
             eachProduct: {},
             totalPrice: 0,
             qty: 0,
+            modal: false,
+            arrEx:[]
+
         }
     },
     props: {
@@ -74,6 +83,7 @@ export default {
     },
     components: {
         ProductToOrder,
+        ExtraModal
     },
     mounted () {
         getProducts(token)
@@ -109,6 +119,10 @@ export default {
                     product.qty--
                 }
             }  
+        },
+        showModal(){
+            this.modal = true
+            this.arrEx = this.$refs.ProductToOrder.showExtras()
         }
     }
 }
@@ -126,6 +140,7 @@ export default {
         grid-row: 2 / 3;
         padding: 40px 0;
         box-sizing: border-box;
+        position: relative;
 
         .food-options {
             grid-column: 1 / 2;
