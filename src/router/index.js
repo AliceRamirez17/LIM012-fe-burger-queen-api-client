@@ -19,12 +19,12 @@ const routes = [
   {
     path: '/employees',
     name: 'Employees',
-    component: () => import(/* webpackChunkName: "about" */ '../components/ManagerView'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/ManagerView'),
   },
   {
     path: '/create-order',
     name: 'CreateOrder',
-    component: () => import(/* webpackChunkName: "about" */ '../components/EmployeeView'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/EmployeeView'),
   }
 ];
 

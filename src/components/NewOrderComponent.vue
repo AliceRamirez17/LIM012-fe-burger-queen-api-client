@@ -25,7 +25,7 @@
         <div class="resume-order">
             <div class="add-client">
                 <label for="client">Cliente</label>
-                <input type="text" id="client">
+                <input type="text" id="client" v-model="client">
             </div>
             <h3 class="title-resume">Resumen</h3>
             <div class="container-list">
@@ -43,7 +43,8 @@
                 <h2>Total</h2>
                 <h2>{{ 'S/' + totalPrice }}</h2>
             </div>
-            <button class="send-order" :style="btnColor">Enviar pedido</button>
+            <!-- Botón para enviar pedido a cocina -->
+            <button class="send-order" :style="btnColor" @click="sendOrder">Enviar pedido</button>
         </div>
         <extra-modal v-if="modal" @close="modal=false">
             <h2>Hamburguesa</h2>
@@ -70,6 +71,7 @@ import { getProducts } from '../controllers/products.js';
 import ExtraModal from './ExtrasModal.vue'
 
 const token = 'qwerryuipuq';
+const userId = '1';
 
 export default {
     data() {
@@ -88,6 +90,7 @@ export default {
             totalPrice: 0,
             qty: 0,
             modal: false,
+            client: ''
         }
     },
     props: {
@@ -117,7 +120,8 @@ export default {
                 this.eachProduct = {
                     qty: this.qty + 1,
                     name: obj.name,
-                    price: obj.price
+                    price: obj.price,
+                    _id: obj._id
                 }
             )
             this.totalPrice = this.totalPrice + parseInt(this.eachProduct.price)
@@ -142,6 +146,14 @@ export default {
         },
         showModal(){
             this.modal = true
+        },
+        sendOrder(){
+            const objOrder = {
+                userId: userId,
+                client: this.client,
+                products: this.listProductSelec
+            }
+            console.log(objOrder)
         }
     }
 }

@@ -34,7 +34,8 @@ export default {
             // this.price = parseInt(productSelected[0].price)
             const obj = {
                 name: productSelected[0].name,
-                price: parseInt(productSelected[0].price)
+                price: parseInt(productSelected[0].price),
+                _id: productSelected[0]._id
             }
             this.$emit('addProduct', obj)
             if(index === 'Hamburguesa simple' || index === 'Hamburguesa doble') {

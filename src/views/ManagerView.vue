@@ -23,12 +23,12 @@
 import { getEmployees, addEmployee } from '../controllers/users.js'
 import { getProducts, addProduct } from '../controllers/products.js'
 
-import NavComponent from './NavComponent.vue';
-import EmployeeList from './EmployeeList.vue';
-import ModalEmployee from './ModalEmployee.vue';
-import ProductsList from './ProductsList.vue';
-import ModalProduct from './ModalProduct.vue';
-import BtnBack from './BtnBackComponent.vue';
+import NavComponent from '../components/NavComponent.vue';
+import EmployeeList from '../components/EmployeeList.vue';
+import ModalEmployee from '../components/ModalEmployee.vue';
+import ProductsList from '../components/ProductsList.vue';
+import ModalProduct from '../components/ModalProduct.vue';
+import BtnBack from '../components/BtnBackComponent.vue';
 
 const token = 'qwerryuipuq';
 
