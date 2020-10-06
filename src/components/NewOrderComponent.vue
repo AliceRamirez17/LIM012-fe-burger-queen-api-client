@@ -90,7 +90,8 @@ export default {
             totalPrice: 0,
             qty: 0,
             modal: false,
-            client: ''
+            client: '',
+            arrOrderSend: []
         }
     },
     props: {
@@ -148,11 +149,21 @@ export default {
             this.modal = true
         },
         sendOrder(){
+            this.listProductSelec.forEach(element => {
+                delete element.name;
+                delete element.price;
+                this.arrOrderSend.push(element)
+            })
             const objOrder = {
                 userId: userId,
                 client: this.client,
-                products: this.listProductSelec
+                products: this.arrOrderSend
             }
+            this.client = ''
+            this.listProductSelec = []
+            this.arrOrderSend = []
+            this.eachProduct = {}
+            this.totalPrice = 0
             console.log(objOrder)
         }
     }
