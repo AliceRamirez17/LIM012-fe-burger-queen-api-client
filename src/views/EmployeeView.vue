@@ -3,7 +3,7 @@
         <nav-component fullname="employee" :style="newOrder ? colorNewOrder : colorOrderList"></nav-component>
         <btn-back linkBack="/home" />
         <NewOrder v-if="newOrder" :btnColor="colorNewOrder"/>
-        <OrderList v-if="orderList"/>
+        <OrderList v-if="orderList" :orders="orders"/>
         <div class="buttons-employee">
             <button @click="showNewOrder" class="btn-manager" :style="newOrder ? colorNewOrder : 'none'">Nuevo pedido</button>
             <button @click="showOrderList" class="btn-manager" :style="orderList ? colorOrderList : 'none'">Pedidos listos</button>
@@ -12,11 +12,15 @@
 </template>
 
 <script>
+import { getOrders } from '../controllers/orders.js'
+
 import navComponent from '../components/NavComponent.vue';
 import NewOrder from '../components/NewOrderComponent.vue';
 import OrderList from '../components/OrderListComponent.vue';
 import orderList from '../components/OrderListComponent';
 import BtnBack from '../components/BtnBackComponent.vue';
+
+const token = 'qwerryuipuq';
 
 export default {
     data() {
@@ -30,7 +34,8 @@ export default {
             colorOrderList: {
                 'background-color': '#00E282',
                 'border': 'none'
-            }
+            },
+            orders: [],
         }
     },
     components: {
@@ -39,6 +44,13 @@ export default {
         orderList,
         BtnBack,
         OrderList
+    },
+    mounted () {
+      getOrders(token)
+        .then(response => {
+            console.log(response);
+            return this.orders = response
+        })
     },
     methods: {
       showNewOrder(){
