@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`prop users return a array of users 1`] = `
+"<div class=\\"employees-list\\">
+  <div class=\\"each-employee\\">
+    <h3> alice@gmail.com </h3>
+    <h3 class=\\"employee-role\\"> Admin </h3> <button class=\\"edit-employee-btn\\"></button> <button class=\\"delete-employee-btn\\"></button>
+  </div>
+  <div class=\\"each-employee\\">
+    <h3> michelle@gmail.com </h3>
+    <h3 class=\\"employee-role\\"> User </h3> <button class=\\"edit-employee-btn\\"></button> <button class=\\"delete-employee-btn\\"></button>
+  </div>
+  <!---->
+  <!---->
+</div>"
+`;
