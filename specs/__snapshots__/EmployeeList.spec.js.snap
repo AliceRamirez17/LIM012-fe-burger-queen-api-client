@@ -1,6 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`prop users return a array of users 1`] = `
+exports[`Testing Employee List component Modal and confirmation initializes to false 1`] = `
+"<div class=\\"employees-list\\">
+  <!---->
+  <!---->
+</div>"
+`;
+
+exports[`Testing Employee List component prop users return a array of users 1`] = `
 "<div class=\\"employees-list\\">
   <div class=\\"each-employee\\">
     <h3> alice@gmail.com </h3>
